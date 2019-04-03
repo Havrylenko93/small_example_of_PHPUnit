@@ -9,6 +9,12 @@ class SomeService implements SomeServiceInterface
 {
     /** @var array */
     protected $data = [];
+    protected $anotherService;
+
+    public function __construct()
+    {
+        $this->anotherService = new AnotherService();
+    }
 
     /**
      * @param array $data
@@ -44,5 +50,10 @@ class SomeService implements SomeServiceInterface
         if ($dateTime->format('Y') === '2019') {
             throw new UnexpectableShitException('eeemm.... smthg went wrong?');
         }
+    }
+
+    public function getDataFromAnotherService(): array
+    {
+        return $this->anotherService->getData();
     }
 }

@@ -2,7 +2,8 @@
 
 namespace App\tests\Unit;
 
-use PHPUnit\Framework\TestCase,
+use App\Services\SomeService,
+    PHPUnit\Framework\TestCase,
     App\Exceptions\UnexpectableShitException,
     App\Factories\ServicesSimpleFactory,
     App\Services\Interfaces\SomeServiceInterface;
@@ -42,5 +43,14 @@ class SomeServiceTest extends TestCase
         $this->assertArrayHasKey('result', $result);
         $result = $this->someServiceObj->doSomething();
         $this->assertArrayNotHasKey('initialData', $result);
+    }
+
+    public function testGetDataFromAnotherService()
+    {
+        $stub = $this->createMock(SomeService::class);
+        $stub->method('getDataFromAnotherService')->willReturn(['as' => 'us']);
+
+        $result = $stub->getDataFromAnotherService();
+        $this->assertArrayHasKey('as', $result);
     }
 }

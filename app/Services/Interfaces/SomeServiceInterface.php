@@ -9,4 +9,6 @@ interface SomeServiceInterface
     public function getDataFromExternalResource(): \stdClass;
 
     public function iWannaAnException(\DateTime $dateTime): void;
+
+    public function getDataFromAnotherService(): array;
 }
